@@ -6,10 +6,16 @@ import logo from "../../assets/images/logo.svg";
 import { Container, Cart } from "./styles";
 import { useCart } from "../../hooks/useCart";
 
+interface CartItemsTotal {
+  key: number;
+}
+
 const Header = (): JSX.Element => {
   const { cart } = useCart();
 
-  const cartSize = cart.length;
+  const cartSize = cart
+    .map((product) => product.id)
+    .filter((value, index, self) => self.indexOf(value) === index).length;
 
   return (
     <Container>
